@@ -11,3 +11,4 @@ dist/
 *.tfplan
 .terraform.lock.hcl
 crash.log
+terraform/backend.hcl
