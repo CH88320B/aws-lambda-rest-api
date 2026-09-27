@@ -155,3 +155,16 @@ describe('routing', () => {
     expect(res.json.error).toBe('Internal server error');
   });
 });
+
+describe('docs', () => {
+  it('serves the OpenAPI spec', async () => {
+    const res = await handler(apiEvent('GET', '/docs/openapi.yaml'));
+    expect(res.statusCode).toBe(200);
+    expect(res.body).toContain('openapi: 3.0.3');
+  });
+
+  it('serves the Swagger UI page', async () => {
+    const res = await handler(apiEvent('GET', '/docs'));
+    expect(res.headers['Content-Type']).toContain('text/html');
+  });
+});

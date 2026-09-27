@@ -3,10 +3,13 @@ const { ok, error } = require('./lib/response');
 const { requireAuth, requireRole } = require('./lib/auth');
 const auth = require('./handlers/auth');
 const products = require('./handlers/products');
+const docs = require('./handlers/docs');
 
 const router = new Router();
 
 router.get('/health', () => ok({ status: 'ok', timestamp: new Date().toISOString() }));
+router.get('/docs', docs.ui);
+router.get('/docs/openapi.yaml', docs.spec);
 
 // Auth
 router.post('/auth/register', auth.register);
