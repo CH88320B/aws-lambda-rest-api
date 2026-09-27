@@ -1,0 +1,13 @@
+node_modules/
+coverage/
+dist/
+*.zip
+.env
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+.terraform.lock.hcl
+crash.log
