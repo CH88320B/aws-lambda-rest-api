@@ -142,6 +142,11 @@ describe('routing', () => {
     expect(res.statusCode).toBe(404);
   });
 
+  it('returns 400 for malformed percent-encoding in path params', async () => {
+    const res = await handler(apiEvent('GET', '/products/%E0%A4%A'));
+    expect(res.statusCode).toBe(400);
+  });
+
   it('returns 405 for known paths with the wrong method', async () => {
     const res = await handler(apiEvent('PATCH', '/products'));
     expect(res.statusCode).toBe(405);

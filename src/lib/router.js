@@ -32,7 +32,7 @@ class Router {
       pathMatched = true;
       if (route.method !== method) continue;
       const params = {};
-      route.keys.forEach((k, i) => { params[k] = decodeURIComponent(m[i + 1]); });
+      route.keys.forEach((k, i) => { params[k] = decodeParam(m[i + 1]); });
       return { route, params };
     }
     throw new HttpError(pathMatched ? 405 : 404, pathMatched ? 'Method not allowed' : 'Not found');
@@ -57,6 +57,14 @@ class Router {
       if (result) return result;
     }
     return result;
+  }
+}
+
+function decodeParam(value) {
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    throw new HttpError(400, 'Malformed URL path parameter');
   }
 }
 
